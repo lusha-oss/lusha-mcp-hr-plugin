@@ -113,75 +113,19 @@ npm run build    # regenerate manifests + mirrored references
 npm run check    # the CI gate, five checks
 ```
 
-### Testing against a local server
+### Testing against a different endpoint
 
-To install the plugin against a local recruiting server, point the manifests at it with the
-`LUSHA_MCP_ORIGIN` env var rather than editing `plugin.config.json`. The committed endpoint
-is then never the thing you touch, and `npm run check` — which reads the config and ignores
-the env — fails on a tree still carrying local endpoints.
-
-In `api-mcp-server`, start the tunnel first and the server second: the server resolves the
-tunnel hostname at boot and advertises it for OAuth, so a restarted tunnel needs a
-restarted server.
+To point the plugin at a different recruiting MCP deployment (a staging environment, or a
+locally-run one), set the `LUSHA_MCP_ORIGIN` env var before building rather than editing
+`plugin.config.json`:
 
 ```
-npm run tunnel                    # prints https://<name>.trycloudflare.com
-npm run start:staging:local:hr    # TYPE=hr, port 3030
+LUSHA_MCP_ORIGIN=https://<your-endpoint> npm run build
 ```
 
-Then here, regenerate the manifests against that origin:
-
-```
-LUSHA_MCP_ORIGIN=https://<name>.trycloudflare.com npm run build
-```
-
-Install the repo as a local marketplace. Claude Code's registry is what both it and Cursor
-read, so this one install covers both:
-
-```
-claude plugin validate .
-claude plugin marketplace add "$PWD"
-claude plugin install lusha-hr@lusha-recruiting-plugins
-```
-
-Then restart the host. Two things to know:
-
-- **Install copies the repo** into `~/.claude/plugins/cache/`, so it is a snapshot and not
-  a live view of your tree. After editing a skill or rebuilding manifests, run
-  `claude plugin update lusha-hr@lusha-recruiting-plugins`.
-- **Cursor's `~/.cursor/plugins/local/` does not work** for this, at least as of Cursor
-  2026.05. A symlinked plugin there is silently ignored; the registry above is what
-  actually loads.
-
-Turn off the general plugin while testing, for the tool-name reason above:
-
-```
-claude plugin disable lusha@claude-plugins-official
-```
-
-Disable the general Lusha plugin while you do this. Both surfaces share some tool names
-(`list_read`, `account_usage`), and two servers offering the same name is a confused agent
-and a test result you cannot trust.
-
-`TYPE=hr` is the whole selector, so **every** store on that server serves recruiter names:
-`/mcp/claude` on a local HR pod is the recruiting surface, which is the production shape.
-Auth is against staging Lusha, so sign in with a staging account.
-
-To smoke-test the server alone, ask it for its tools. No tunnel needed — local rebinding
-protection is off:
-
-```
-curl -s http://127.0.0.1:3030/mcp/claude \
-  -H 'x-api-key: <staging key>' \
-  -H 'content-type: application/json' \
-  -H 'accept: application/json, text/event-stream' \
-  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}'
-```
-
-26 tools, all recruiter-facing, is the expected answer.
-
-`npm run build` with no `LUSHA_MCP_ORIGIN` restores the committed endpoints, and
-`npm run check` fails until you do.
+The committed endpoint is then never the thing you touch by hand, and `npm run check` —
+which reads `plugin.config.json` and ignores the env override — fails on a tree still
+carrying a non-production endpoint, so an accidental local build can't be committed.
 
 `npm run check` enforces:
 
@@ -193,28 +137,22 @@ curl -s http://127.0.0.1:3030/mcp/claude \
    Code spans and fenced blocks are exempt, because they carry upstream API field names
    that are not ours to rewrite. A `<!-- vocab-gate:off -->` region opts out explicitly,
    which the reference needs in order to state the rule at all.
-3. **No tool named that this surface does not serve**, checked against `tools.json`, which
-   mirrors `recruiter-tool-names.ts` in `api-mcp-server`. Includes the general-surface
+3. **No tool named that this surface does not serve**, checked against `tools.json`, this
+   repo's own crosswalk of the recruiter tool surface. Includes the general-surface
    names, so a skill cannot send the model at `table_create` or `contacts_search`.
 4. The mirrored shared references are byte-identical to the canonical one.
 5. The manifests match `plugin.config.json`, Gemini uses `httpUrl`, and every endpoint,
    attribution header and version lines up.
 
-Checks 2 and 3 are the plugin-side twin of `recruiter-surface-vocabulary.test.ts` in
-`api-mcp-server`: that one guards the tool and parameter descriptions, this one guards the
-skill text.
-
 ### Where the words come from
 
-The skills and the shared reference are transcribed from the Confluence page of record,
-"Recruiter Plugin: Shared Skill Reference and Test Scenarios". **That page wins over any
-ticket, and over this repo** — if they disagree, re-transcribe rather than edit here. One
-paragraph of Part 1 is deliberately not transcribed, and the reference says which and why.
+The skills and the shared reference are maintained by the Lusha recruiting team as the
+source of truth for this plugin's terminology, guardrails and behaviour — if a skill file
+and any other internal note disagree, the skill file wins.
 
-`docs/test-scenarios.md` is Part 3 of the same page with a result column. Those scenarios
-are the acceptance criteria on INF-3040, INF-3041 and INF-3042, and they are meant to be
-run **with no skill hint**: a skill that only fires when named has a routing bug in its
-`description`.
+`docs/test-scenarios.md` lists the acceptance scenarios these skills are tested against,
+meant to be run **with no skill hint**: a skill that only fires when named has a routing
+bug in its `description`.
 
 ### Placeholders
 

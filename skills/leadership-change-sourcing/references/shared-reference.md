@@ -1,15 +1,15 @@
 # Shared Reference
 
-<!-- Transcribed from Part 1 of the Confluence page of record, "Recruiter Plugin: Shared
-Skill Reference and Test Scenarios" (page 5659623449). That page wins over any ticket, and
-over this file: if the two disagree, re-transcribe rather than edit here.
+<!-- This is the canonical copy, maintained internally as the source of truth for the three
+skills' terminology and guardrails. If it disagrees with an internal note elsewhere, this
+file wins.
 
-One paragraph of Part 1 is deliberately not transcribed — the note explaining that the
-recruiter tool names differ from the sales server's, which quotes a canonical sales tool
-name. It is guidance for someone comparing logs across the two surfaces, not for the
+One piece of internal context is deliberately not included here: a note explaining that
+the recruiter tool names differ from the general sales server's, which names a sales-side
+tool. It is guidance for someone comparing logs across the two surfaces, not for the
 assistant, and shipping it would put a tool name this surface does not serve in front of
 the model. That is the one thing the recruiter surface is built to avoid. The crosswalk
-lives in the repo's tools.json and in PRD 6.6.
+lives in this repo's tools.json.
 
 Do not edit skills/*/references/shared-reference.md by hand; they are generated mirrors of
 this file. Run `npm run build`. -->

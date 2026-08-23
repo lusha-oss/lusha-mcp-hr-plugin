@@ -8,10 +8,9 @@
 //   4. the mirrored shared references are byte-identical to the canonical one
 //   5. the generated manifests match plugin.config.json
 //
-// 2 and 3 are the plugin-side twin of the server-side guard in api-mcp-server's
-// tests/unit/recruiter-surface-vocabulary.test.ts. That one covers tool and parameter
-// descriptions; this one covers the skill text, which is the other half of what the
-// model reads and the half a human edits by hand.
+// 2 and 3 are the plugin-side twin of an equivalent server-side guard over tool and
+// parameter descriptions. This one covers the skill text, which is the other half of what
+// the model reads and the half a human edits by hand.
 
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';

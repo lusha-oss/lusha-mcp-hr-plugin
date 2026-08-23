@@ -1,9 +1,8 @@
 # Test Scenarios
 
-Part 3 of the Confluence page of record, transcribed with a **Result** column to fill in.
-These are the acceptance criteria on INF-3040, INF-3041 and INF-3042, so a scenario is not
-a suggestion: where one tests a hard rule, failing it is a defect rather than a tuning
-issue.
+The acceptance scenarios for the three skills in this plugin, with a **Result** column to
+fill in. A scenario is not a suggestion: where one tests a hard rule, failing it is a
+defect rather than a tuning issue.
 
 Each scenario is pass or fail on observable behaviour, not on whether the answer felt good.
 
@@ -18,17 +17,15 @@ wrong" is not a result anyone can act on.
 
 ## Where to run it
 
-Three places, cheapest first.
+Against any connected recruiter MCP deployment — production for a final pass, or a
+non-production endpoint pointed at via `LUSHA_MCP_ORIGIN` (see
+[Testing against a different endpoint](../README.md#testing-against-a-different-endpoint))
+for everything before that, since a non-production endpoint gives you the call log to check
+against.
 
-| Target | How | Good for |
-|--------|-----|----------|
-| Local recruiter server | `npm run tunnel` and `npm run start:staging:local:hr` in `api-mcp-server`, then `LUSHA_MCP_ORIGIN=<tunnel> npm run build` here and install. See [Testing against a local server](../README.md#testing-against-a-local-server) | Everything. No deploy, and the call log is in front of you |
-| Staging | `LUSHA_MCP_ORIGIN=https://mcp-staging-hr.lusha.com npm run build`, then install. **Do not commit the rebuilt manifests** | The real OAuth flow and the real gateway |
-| Production | `https://mcp-hr.lusha.com/mcp/<client>`, the committed endpoint | Final pass, once DNS and the gateway route exist |
-
-Groups B, C, D, E, F and I are also testable against the sales MCP with the tool names
-substituted through the crosswalk in `tools.json`, which is worth doing before any server
-work lands: a wording problem found there is free.
+Groups B, C, D, E, F and I are also testable against the general sales MCP surface with the
+tool names substituted through the crosswalk in `tools.json`, which is worth doing before
+this plugin's own server deployment exists: a wording problem found there is free.
 
 ---
 

@@ -33,7 +33,7 @@ Every event must have a date. An event you cannot date is useless here, because 
 
 Do not pad an empty result. Do not present the absence of a signal as evidence that nothing happened.
 
-Known risk: how consistently Executive Departure fires across a large company set has not been measured. If it turns out to be thin, this skill is thin, and that is being checked in INF-3042.
+Known risk: how consistently Executive Departure fires across a large company set has not been measured. If it turns out to be thin, this skill is thin, and that coverage question is being tracked internally.
 
 **Step 4. Search one level below.** For each company with a dated event, `talent_search` scoped to that company, at the level below the person who left, with the tenure exclude applied. Level mapping, roughly: a c-suite departure puts vice president and director in play; a vice president departure puts director and manager in play; a director departure puts manager and senior in play.
 

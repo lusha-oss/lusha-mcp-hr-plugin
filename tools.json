@@ -1,6 +1,5 @@
 {
-  "source": "lusha-oss/api-mcp-server, src/web/mcp/verticals/recruiter-tool-names.ts",
-  "note": "Mirror of the recruiter surface, kept here so scripts/check.mjs can reject a skill that names a tool the surface does not serve. The server file is authoritative; if the two disagree, the server wins and this file is stale.",
+  "note": "Mirror of the recruiter tool surface, kept here so scripts/check.mjs can reject a skill that names a tool the surface does not serve. The deployed server is authoritative; if the two disagree, the server wins and this file is stale.",
   "allowed": [
     "account_usage",
     "candidate_change_filters",

@@ -3,8 +3,8 @@
 // against what is committed without either duplicating the shapes.
 //
 // Generated rather than hand-maintained because the display name is Marketing's to change
-// (INF-3044) and the description is ~1,400 characters. Six hand-synced copies of that is
-// six chances to update five of them.
+// and the description is ~1,400 characters. Six hand-synced copies of that is six chances
+// to update five of them.
 
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';

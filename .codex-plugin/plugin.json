@@ -1,0 +1,50 @@
+{
+  "name": "lusha-hr",
+  "version": "0.1.0",
+  "description": "Lusha for Recruiting: Source talent and keep a talent pipeline live.",
+  "author": {
+    "name": "Lusha",
+    "email": "support@lusha.com",
+    "url": "https://www.lusha.com"
+  },
+  "homepage": "https://www.lusha.com",
+  "repository": "https://github.com/lusha-oss/lusha-mcp-hr-plugin",
+  "license": "MIT",
+  "keywords": [
+    "lusha",
+    "recruiting",
+    "talent-sourcing",
+    "talent-acquisition",
+    "sourcing",
+    "hiring",
+    "candidate-search",
+    "talent-pipeline",
+    "recruiter",
+    "mcp"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./mcp.json",
+  "interface": {
+    "displayName": "Lusha for Recruiting",
+    "shortDescription": "Source talent and keep a talent pipeline live",
+    "longDescription": "Connect Lusha to ChatGPT to source talent, keep a talent pipeline live, and reach people while they are actually approachable — straight from your chat. Lusha holds verified work contact details, employer news and job-change history across hundreds of millions of professional profiles, backed by GDPR, CCPA, SOC 2 Type II and ISO 27701 compliance. Built for sourcing an open position, working a saved pipeline over weeks, and catching the window after a leadership change.\n\nUse Lusha to:\n- Source talent for an open position and get an ordered shortlist, each candidate with a reason to approach them now — \"I need a senior backend engineer in Berlin\"\n- Find people who have been in the same job long enough to be open to a move, which is the whole approachability signal — \"engineering managers in Amsterdam, two years or more in seat\"\n- Report only what changed on a saved pipeline: who moved, who was promoted, who newly crossed the tenure threshold — \"what has changed on my Berlin pipeline?\"\n- Catch the weeks after an executive departure, when the layer underneath is most in play — \"who is in play at fintechs that just lost engineering leadership?\"\n- Open contact details for the candidates you name, one at a time, with the cost stated before anything is spent — \"get me the email for the top three\"",
+    "developerName": "Lusha",
+    "category": "Recruiting",
+    "capabilities": [
+      "Interactive",
+      "Read"
+    ],
+    "websiteURL": "https://www.lusha.com",
+    "privacyPolicyURL": "https://www.lusha.com/privacy",
+    "termsOfServiceURL": "https://www.lusha.com/terms-and-conditions",
+    "defaultPrompt": [
+      "I need to hire a senior backend engineer in Berlin",
+      "What has changed on my Berlin pipeline since July?",
+      "Any engineering leadership departures in European fintech recently?"
+    ],
+    "brandColor": "#2557FF",
+    "composerIcon": "./assets/logo.png",
+    "logo": "./assets/logo.png",
+    "screenshots": []
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "lusha-recruiting-plugins",
+  "interface": {
+    "displayName": "Lusha for Recruiting Plugins"
+  },
+  "plugins": [
+    {
+      "name": "lusha-hr",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/lusha-oss/lusha-mcp-hr-plugin.git",
+        "ref": "master"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Recruiting"
+    }
+  ]
+}

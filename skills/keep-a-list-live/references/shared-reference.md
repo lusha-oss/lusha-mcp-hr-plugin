@@ -8,8 +8,8 @@ One piece of internal context is deliberately not included here: a note explaini
 the recruiter tool names differ from the general sales server's, which names a sales-side
 tool. It is guidance for someone comparing logs across the two surfaces, not for the
 assistant, and shipping it would put a tool name this surface does not serve in front of
-the model. That is the one thing the recruiter surface is built to avoid. The crosswalk
-lives in this repo's tools.json.
+the model. That is the one thing the recruiter surface is built to avoid. That crosswalk is
+server-owned, not tracked in this repo.
 
 Do not edit skills/*/references/shared-reference.md by hand; they are generated mirrors of
 this file. Run `npm run build`. -->

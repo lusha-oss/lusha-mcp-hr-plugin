@@ -1,16 +1,20 @@
 #!/usr/bin/env node
-// CI gate. Five checks, in order of how badly the thing they catch would read to a
+// CI gate. Four checks, in order of how badly the thing they catch would read to a
 // recruiter:
 //
 //   1. every skill has usable frontmatter, and its name matches its folder
 //   2. no sales vocabulary in anything a recruiter reads
-//   3. no tool named that this surface does not serve
-//   4. the mirrored shared references are byte-identical to the canonical one
-//   5. the generated manifests match plugin.config.json
+//   3. the mirrored shared references are byte-identical to the canonical one
+//   4. the generated manifests match plugin.config.json
 //
-// 2 and 3 are the plugin-side twin of an equivalent server-side guard over tool and
+// Check 2 is the plugin-side twin of an equivalent server-side guard over tool and
 // parameter descriptions. This one covers the skill text, which is the other half of what
 // the model reads and the half a human edits by hand.
+//
+// This does not check that a skill only names tools the recruiter surface actually serves.
+// That crosswalk is server-owned and changes on the server's schedule, so mirroring it here
+// would just be a second copy to keep in sync; the server's own tests are the source of
+// truth for which tool names exist.
 
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
@@ -21,7 +25,6 @@ const issues = [];
 const fail = (where, message) => issues.push(`${where}: ${message}`);
 
 const config = readJson('plugin.config.json');
-const tools = readJson('tools.json');
 
 const CANONICAL_REFERENCE = 'skills/_shared/SHARED-REFERENCE.md';
 
@@ -123,43 +126,7 @@ for (const [where, text] of recruiterFacing) {
 }
 
 // ---------------------------------------------------------------------------
-// 3. Tool names
-// ---------------------------------------------------------------------------
-
-const allowed = new Set(tools.allowed);
-const notTools = new Set(tools.notTools);
-
-// Anything the recruiter surface will answer `not found` to. A description that sends the
-// model at one of these is a dead end it will try anyway.
-const forbiddenTools = new Set(
-  [...Object.keys(tools.withheld), ...Object.values(tools.canonical)].filter(name => !allowed.has(name)),
-);
-
-const identifier = /\b[a-z][a-z0-9]*(?:_[a-z0-9]+)+\b/g;
-
-for (const [where, text] of recruiterFacing) {
-  for (const forbidden of forbiddenTools) {
-    if (new RegExp(`\\b${forbidden}\\b`).test(text)) {
-      fail(where, `names '${forbidden}', which this surface does not serve`);
-    }
-  }
-
-  for (const found of new Set(text.match(identifier) ?? [])) {
-    if (!allowed.has(found) && !notTools.has(found) && !forbiddenTools.has(found)) {
-      fail(where, `unknown snake_case identifier '${found}': add it to tools.json allowed or notTools, or fix the name`);
-    }
-  }
-}
-
-// Named in the reference's cost table and hard rules, so a crosswalk drift shows up here
-// rather than in a recruiter's session.
-for (const required of ['talent_search', 'candidate_profile', 'list_read', 'list_run_column']) {
-  if (!allowed.has(required)) fail('tools.json', `allowed is missing '${required}'`);
-}
-if (allowed.size !== 26) fail('tools.json', `allowed has ${allowed.size} tools; the recruiter surface has 26`);
-
-// ---------------------------------------------------------------------------
-// 4. Mirrored references
+// 3. Mirrored references
 // ---------------------------------------------------------------------------
 
 const canonical = readFileSync(join(ROOT, CANONICAL_REFERENCE), 'utf8');
@@ -176,7 +143,7 @@ for (const skill of SKILLS) {
 }
 
 // ---------------------------------------------------------------------------
-// 5. Generated manifests
+// 4. Generated manifests
 // ---------------------------------------------------------------------------
 
 for (const [path, expected] of buildArtifacts(config)) {
@@ -240,6 +207,6 @@ if (issues.length) {
 }
 
 console.log(
-  `PASS - ${SKILLS.length} skills, ${allowed.size} allowed tools, ${buildArtifacts(config).size} generated files: ` +
-  'frontmatter, vocabulary, tool names, mirrored references and manifests are clean.',
+  `PASS - ${SKILLS.length} skills, ${buildArtifacts(config).size} generated files: ` +
+  'frontmatter, vocabulary, mirrored references and manifests are clean.',
 );

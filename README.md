@@ -110,7 +110,7 @@ six hand-synced copies is six chances to update five of them.
 
 ```
 npm run build    # regenerate manifests + mirrored references
-npm run check    # the CI gate, five checks
+npm run check    # the CI gate, four checks
 ```
 
 ### Testing against a different endpoint
@@ -137,22 +137,20 @@ carrying a non-production endpoint, so an accidental local build can't be commit
    Code spans and fenced blocks are exempt, because they carry upstream API field names
    that are not ours to rewrite. A `<!-- vocab-gate:off -->` region opts out explicitly,
    which the reference needs in order to state the rule at all.
-3. **No tool named that this surface does not serve**, checked against `tools.json`, this
-   repo's own crosswalk of the recruiter tool surface. Includes the general-surface
-   names, so a skill cannot send the model at `table_create` or `contacts_search`.
-4. The mirrored shared references are byte-identical to the canonical one.
-5. The manifests match `plugin.config.json`, Gemini uses `httpUrl`, and every endpoint,
+3. The mirrored shared references are byte-identical to the canonical one.
+4. The manifests match `plugin.config.json`, Gemini uses `httpUrl`, and every endpoint,
    attribution header and version lines up.
+
+This repo does not maintain its own copy of which tool names the recruiter MCP server
+serves — that list is server-owned and changes on the server's schedule, so a skill
+sending the model at a tool this surface doesn't have is caught server-side rather than by
+a mirror here that could drift.
 
 ### Where the words come from
 
 The skills and the shared reference are maintained by the Lusha recruiting team as the
 source of truth for this plugin's terminology, guardrails and behaviour — if a skill file
 and any other internal note disagree, the skill file wins.
-
-`docs/test-scenarios.md` lists the acceptance scenarios these skills are tested against,
-meant to be run **with no skill hint**: a skill that only fires when named has a routing
-bug in its `description`.
 
 ### Placeholders
 

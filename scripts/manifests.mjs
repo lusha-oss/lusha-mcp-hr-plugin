@@ -36,6 +36,14 @@ export const describeFor = (config, client) =>
     .replaceAll('{{label}}', client.label)
     .replaceAll('{{surface}}', client.surface);
 
+// The plugin manifest's `description` is a brief, user-facing one-liner — Claude Code's
+// install validation caps it at 500 characters, and the ~1,400-character descriptionTemplate
+// is written for a marketplace listing, not a manifest field. Codex already split these two
+// (a short top-level `description` plus `interface.longDescription`); this brings the other
+// clients' plugin manifests in line with that rather than handing all of them the long copy.
+export const briefDescriptionFor = (config) =>
+  `${config.display.displayName}: ${config.display.shortDescription}.`;
+
 // One MCP entry shape, two key names: Gemini reads `httpUrl`, everyone else `url` behind
 // `type: "http"`.
 export const serverEntryFor = (config, client) => {
@@ -57,10 +65,10 @@ export function buildArtifacts(config = loadConfig()) {
   const { name, version, license, repository, homepage, author, keywords, display, marketplace } = config;
   const { claude, cursor, codex, copilot, gemini } = config.clients;
 
-  const common = (client) => ({
+  const common = () => ({
     name,
     version,
-    description: describeFor(config, client),
+    description: briefDescriptionFor(config),
     author,
     homepage,
     repository,
@@ -68,11 +76,11 @@ export function buildArtifacts(config = loadConfig()) {
     keywords,
   });
 
-  const catalogEntry = (client) => ({
+  const catalogEntry = () => ({
     name,
     source: './',
     version,
-    description: describeFor(config, client),
+    description: briefDescriptionFor(config),
     author: { name: author.name },
     homepage,
     repository,
@@ -85,19 +93,19 @@ export function buildArtifacts(config = loadConfig()) {
 
   artifacts.set(claude.manifest, json({
     $schema: claude.schema,
-    ...common(claude),
+    ...common(),
     mcpServers: serverEntryFor(config, claude),
   }));
 
   artifacts.set(cursor.manifest, json({
-    ...common(cursor),
+    ...common(),
     logo: cursor.logo,
     skills: cursor.skills,
     mcpServers: serverEntryFor(config, cursor),
   }));
 
   artifacts.set(copilot.manifest, json({
-    ...common(copilot),
+    ...common(),
     skills: copilot.skills,
     mcpServers: serverEntryFor(config, copilot),
   }));
@@ -105,7 +113,7 @@ export function buildArtifacts(config = loadConfig()) {
   artifacts.set(gemini.manifest, json({
     name,
     version,
-    description: describeFor(config, gemini),
+    description: briefDescriptionFor(config),
     mcpServers: serverEntryFor(config, gemini),
   }));
 
@@ -114,7 +122,7 @@ export function buildArtifacts(config = loadConfig()) {
   artifacts.set(codex.manifest, json({
     name,
     version,
-    description: `${display.displayName}: ${display.shortDescription}.`,
+    description: briefDescriptionFor(config),
     author,
     homepage,
     repository,
@@ -145,12 +153,12 @@ export function buildArtifacts(config = loadConfig()) {
   artifacts.set(claude.marketplaceCatalog, json({
     $schema: claude.marketplaceSchema,
     ...marketplace,
-    plugins: [catalogEntry(claude)],
+    plugins: [catalogEntry()],
   }));
 
   artifacts.set(cursor.marketplaceCatalog, json({
     ...marketplace,
-    plugins: [catalogEntry(cursor)],
+    plugins: [catalogEntry()],
   }));
 
   // Codex installs by cloning the repo URL rather than from a local path, so the ref

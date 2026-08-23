@@ -14,8 +14,7 @@
     "description": "Official Lusha plugins for recruiting — source talent, keep a talent pipeline live, and catch the weeks after a leadership change.",
     "owner": {
       "name": "Lusha",
-      "url": "https://www.lusha.com",
-      "email": "plugins@lusha.com"
+      "url": "https://www.lusha.com"
     }
   },
   "server": {

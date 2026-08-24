@@ -1,0 +1,14 @@
+{
+  "name": "lusha-hr",
+  "version": "0.1.0",
+  "description": "Lusha for Recruiting: Source talent and keep a talent pipeline live.",
+  "mcpServers": {
+    "lusha-hr": {
+      "httpUrl": "https://mcp-hr.lusha.com/mcp/gemini",
+      "headers": {
+        "X-Lusha-Plugin": "gemini-hr",
+        "X-Lusha-Plugin-Version": "0.1.0"
+      }
+    }
+  }
+}

@@ -1,7 +1,7 @@
 {
   "name": "lusha-recruiting-plugins",
   "interface": {
-    "displayName": "Lusha for Recruiting Plugins"
+    "displayName": "Lusha Talent Sourcing Plugins"
   },
   "plugins": [
     {

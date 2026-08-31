@@ -1,5 +1,5 @@
 {
-  "name": "lusha-hr",
+  "name": "lusha-talent-sourcing",
   "version": "0.2.0",
   "license": "MIT",
   "repository": "https://github.com/lusha-oss/lusha-mcp-hr-plugin",
@@ -18,7 +18,7 @@
     }
   },
   "server": {
-    "key": "lusha-hr",
+    "key": "lusha-talent-sourcing",
     "origin": "https://mcp-hr.lusha.com",
     "pluginHeaderSuffix": "-hr"
   },

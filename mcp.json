@@ -1,6 +1,6 @@
 {
   "mcpServers": {
-    "lusha-hr": {
+    "lusha-talent-sourcing": {
       "type": "http",
       "url": "https://mcp-hr.lusha.com/mcp/codex",
       "headers": {

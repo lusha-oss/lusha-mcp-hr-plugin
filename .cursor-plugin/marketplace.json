@@ -7,7 +7,7 @@
   },
   "plugins": [
     {
-      "name": "lusha-hr",
+      "name": "lusha-talent-sourcing",
       "source": "./",
       "version": "0.2.0",
       "description": "Lusha Talent Sourcing: Source passive candidates with verified emails, phone numbers, and career-move signals.",

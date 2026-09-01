@@ -1,11 +1,11 @@
 {
   "name": "lusha-recruiting-plugins",
   "interface": {
-    "displayName": "Lusha for Recruiting Plugins"
+    "displayName": "Lusha Talent Sourcing Plugins"
   },
   "plugins": [
     {
-      "name": "lusha-hr",
+      "name": "lusha-talent-sourcing",
       "source": {
         "source": "url",
         "url": "https://github.com/lusha-oss/lusha-mcp-hr-plugin.git",

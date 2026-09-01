@@ -8,10 +8,10 @@
   },
   "plugins": [
     {
-      "name": "lusha-hr",
+      "name": "lusha-talent-sourcing",
       "source": "./",
-      "version": "0.1.0",
-      "description": "Lusha for Recruiting: Source talent and keep a talent pipeline live.",
+      "version": "0.2.1",
+      "description": "Lusha Talent Sourcing: Source passive candidates with verified emails, phone numbers, and career-move signals.",
       "author": {
         "name": "Lusha"
       },

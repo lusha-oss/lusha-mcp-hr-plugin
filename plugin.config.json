@@ -1,6 +1,6 @@
 {
-  "name": "lusha-hr",
-  "version": "0.1.0",
+  "name": "lusha-talent-sourcing",
+  "version": "0.2.1",
   "license": "MIT",
   "repository": "https://github.com/lusha-oss/lusha-mcp-hr-plugin",
   "homepage": "https://www.lusha.com",
@@ -18,13 +18,13 @@
     }
   },
   "server": {
-    "key": "lusha-hr",
+    "key": "lusha-talent-sourcing",
     "origin": "https://mcp-hr.lusha.com",
     "pluginHeaderSuffix": "-hr"
   },
   "display": {
-    "displayName": "Lusha for Recruiting",
-    "shortDescription": "Source talent and keep a talent pipeline live",
+    "displayName": "Lusha Talent Sourcing",
+    "shortDescription": "Source passive candidates with verified emails, phone numbers, and career-move signals",
     "category": "Recruiting",
     "developerName": "Lusha",
     "brandColor": "#2557FF",
@@ -49,7 +49,7 @@
     "recruiter",
     "mcp"
   ],
-  "descriptionTemplate": "Connect Lusha to {{label}} to source talent, keep a talent pipeline live, and reach people while they are actually approachable — straight from your {{surface}}. Lusha holds verified work contact details, employer news and job-change history across hundreds of millions of professional profiles, backed by GDPR, CCPA, SOC 2 Type II and ISO 27701 compliance. Built for sourcing an open position, working a saved pipeline over weeks, and catching the window after a leadership change.\n\nUse Lusha to:\n- Source talent for an open position and get an ordered shortlist, each candidate with a reason to approach them now — \"I need a senior backend engineer in Berlin\"\n- Find people who have been in the same job long enough to be open to a move, which is the whole approachability signal — \"engineering managers in Amsterdam, two years or more in seat\"\n- Report only what changed on a saved pipeline: who moved, who was promoted, who newly crossed the tenure threshold — \"what has changed on my Berlin pipeline?\"\n- Catch the weeks after an executive departure, when the layer underneath is most in play — \"who is in play at fintechs that just lost engineering leadership?\"\n- Open contact details for the candidates you name, one at a time, with the cost stated before anything is spent — \"get me the email for the top three\"",
+  "descriptionTemplate": "Lusha Talent Sourcing helps recruiters and talent acquisition teams find, qualify, and connect with the right candidates directly from their AI workflow.\nSource passive talent, build targeted candidate lists, uncover verified contact information, and use career-move signals to identify candidates who may be more open to a new opportunity.\n\nWhether you're hiring software engineers, sales leaders, executives, or other hard-to-reach talent, Lusha gives you the data and signals you need to move from candidate search to outreach faster.\n\nWhat you can do with Lusha Talent Sourcing:\n\n- Find and source candidates: Search for relevant candidates by job title, skills, level, company, industry, location, and other criteria.\n- Build targeted candidate lists: Turn your ideal candidate profile into focused sourcing lists without leaving your AI conversation.\n- Get verified contact information: Access verified emails and phone numbers so you can reach candidates directly.\n- Identify candidates ready to move: Use career-move and recruiting signals to prioritize people who may be more likely to consider a new opportunity.\n- Speed up recruiting workflows: Go from candidate discovery to a qualified outreach list in fewer steps.\n\nBuilt for recruiters, sourcers, and talent acquisition teams who want a faster way to find passive candidates and turn AI-powered searches into actionable recruiting pipelines.\n\nAn active Lusha account is required to access enriched data.",
   "clients": {
     "claude": {
       "label": "Claude",

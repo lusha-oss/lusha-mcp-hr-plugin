@@ -1,13 +1,13 @@
 {
-  "name": "lusha-hr",
-  "version": "0.1.0",
-  "description": "Lusha for Recruiting: Source talent and keep a talent pipeline live.",
+  "name": "lusha-talent-sourcing",
+  "version": "0.2.1",
+  "description": "Lusha Talent Sourcing: Source passive candidates with verified emails, phone numbers, and career-move signals.",
   "mcpServers": {
-    "lusha-hr": {
+    "lusha-talent-sourcing": {
       "httpUrl": "https://mcp-hr.lusha.com/mcp/gemini",
       "headers": {
         "X-Lusha-Plugin": "gemini-hr",
-        "X-Lusha-Plugin-Version": "0.1.0"
+        "X-Lusha-Plugin-Version": "0.2.1"
       }
     }
   }

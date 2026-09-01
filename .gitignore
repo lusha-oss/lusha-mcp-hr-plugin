@@ -15,6 +15,9 @@
 # Node (the build and check scripts have no dependencies, but in case any land later)
 node_modules/
 
+# Packaged plugin archives
+dist/
+
 # Editor swap files
 *.swp
 *.swo

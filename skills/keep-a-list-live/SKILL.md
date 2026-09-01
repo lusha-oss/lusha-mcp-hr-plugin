@@ -5,51 +5,160 @@ description: Report what changed on a saved candidate list, and work the list. U
 
 # Keep a List Live
 
-Read `references/shared-reference.md` first. It carries the terminology, the fifteen hard rules, the tenure mechanism, the ordering rules and the cost table. This file is the flow.
+Read `references/shared-reference.md` first. It carries the terminology, the twenty hard rules, the
+tenure mechanism, the ordering rules and the cost table. This file is the flow.
 
-**What this skill is for.** A recruiter built a talent pipeline weeks ago. They come back and want to know what changed, not to read the whole roster again. This is the skill that makes the product worth opening twice.
+## What this skill is for
 
-**Language.** A saved list is their talent pipeline once they have built it, and each person on it is a candidate. Say "three candidates on your Berlin pipeline moved", not "three talents moved" and not "three records changed". Shared reference section 1.
+A recruiter built a talent pipeline weeks ago. They come back and want to know what
+changed, not to read the whole roster again. This is the skill that makes the
+product worth opening twice.
 
-Three kinds of change matter, in roughly this order. Someone moved company or was promoted, so their situation changed. Someone newly crossed the tenure threshold, so they were too fresh to approach last time and now they are not, and nobody else in the market is tracking this. Their employer had news, so the reason to reach out changed.
+**Language.** A saved list is their **talent pipeline** once they have built it,
+and each person on it is a **candidate**. Say "three candidates on your Berlin
+pipeline moved", not "three talents moved" and not "three records changed". Shared
+reference section 1.
 
-**Step 0. Confirm, and say what the read costs.** Only ask what you cannot infer: which pipeline, if the account has more than one plausible match, and if there is one obvious match use it and name it rather than asking; and since when, if you have no record of a last check, offered as a default, "I will look at the last three months unless you want a different window."
+Three kinds of change matter, in roughly this order:
+
+1. Someone moved company or was promoted. Their situation changed.
+2. Someone newly crossed the tenure threshold. They were too fresh to approach
+   last time and now they are not. Nobody else in the market is tracking this.
+3. Their employer had news. The reason to reach out changed.
+
+## Step 0. Confirm, and say what the read costs
+
+Only ask what you cannot infer:
+
+- **Which list**, if the account has more than one plausible match. If there is
+  one obvious candidate, use it and name it rather than asking.
+- **Since when**, if you have no record of a last check. Offer a default: "I will
+  look at the last three months unless you want a different window."
 
 Then say what you are about to read and what it costs, before reading it:
 
-> Your Berlin Backend pipeline has 80 people. Reading it back costs 4 credits, then checking for movement costs per signal found. Go ahead?
+> Your Berlin Backend list has 80 people. Reading it back costs 4 credits, then
+> checking for movement bills per event found plus one per request, so the cap I
+> set is what bounds it. I would expect somewhere between 30 and 60 in total and
+> I will tell you the exact number afterwards. Go ahead?
 
-For a small pipeline just say it and proceed. For a large one, wait.
+For a small list just say it and proceed. For a large one, wait.
 
-**Step 1. Find the pipeline.** `list_find`. Free, verified. Never send an `email` parameter to it. If several could match, name them and ask which. Do not guess between two plausible pipelines; reading the wrong one costs credits and wastes the turn.
+## Step 1. Find the list
 
-**Step 2. Read the rows you need.** `list_read`. This costs 1 credit per 25 rows returned, whether or not anything is revealed, and the values come back masked. The sales server's own description says it is free. It is not. Do not repeat that claim to the recruiter. Page rather than pulling the whole list. If they asked about a handful of candidates, read the page those candidates are on and stop.
+`list_find`. Free, verified. Never send an `email` parameter to it.
 
-**Step 3. Who moved.** Resolve the signal types first, with `candidate_change_filters`. Free. It returns what actually exists right now rather than what this file thinks exists. Two types exist today, `promotion` and `companyChange`, but if Lusha adds a third the filter tool will show it and you should use it. Do not hardcode the list from this document.
+If several lists could match, name them and ask which. Do not guess between two
+plausible lists; reading the wrong one costs credits and wastes the turn.
 
-Then `candidate_changes`, batched at 25, windowed with `startDate` set to their last check so you only get new movement. Nothing beyond what the filter tool returns is available at person level, so do not go looking for manager changes or job hunting signals just because a recruiter asks for them. Identify candidates by LinkedIn URL where you have it, otherwise email, otherwise full name plus company.
+## Step 2. Read the rows you need
 
-**Step 4. What happened at their employers.** `employer_events` on the companies from the pipeline, 25 per call, `startDate` set to the last check. For a refresh the events that matter are the ones that make someone more approachable: contraction, restructure, acquisition, facility closure, executive departure. A hiring surge is worth reporting but it is weaker.
+`list_read`. **This costs 1 credit per 25 rows returned**, whether or not
+anything is revealed, and the values come back masked. Reading a list is not
+free, so say the cost before you read.
 
-**Step 5. Who newly became approachable.** This is the step that earns the skill. Re-run the original position search with the tenure exclude date moved to today, then diff against the pipeline. Anyone who appears now but did not before has crossed the threshold since the last check.
+Page rather than pulling the whole list. If they asked about a handful of people,
+read the page those people are on and stop.
 
-Do not try to calculate this from stored dates. The search filters on tenure but does not return it, so there is nothing stored to calculate from. It is a re-run and a diff. If you do not have the original search criteria, say so and offer to rebuild them from the pipeline rather than guessing.
+## Step 3. Who moved
 
-**Step 6. Order the diff.** Per shared reference section 6, adapted: order by how much each change matters to a recruiter, not by the order the signals came back. A candidate who changed company outranks one whose employer posted a job. Recency breaks ties.
+**Resolve the signal types first.** `candidate_change_filters`. Free. It returns
+what actually exists right now rather than what this file thinks exists. Two types
+exist today, `promotion` and `companyChange`, but if Lusha adds a third the filter
+tool will show it and you should use it. Do not hardcode the list from this
+document.
 
-**Step 7. Answer.** Report only what changed. Group by type, and put a date on every entry.
+Then `candidate_changes`, batched at 25, windowed with `startDate` set to their
+last check so you only get new movement.
+
+Nothing beyond what the filter tool returns is available at person level, so do not
+go looking for manager changes or job hunting signals just because a recruiter asks
+for them.
+
+Identify people by LinkedIn URL where you have it, otherwise email, otherwise full
+name plus company.
+
+## Step 4. What happened at their employers
+
+`employer_events` on the companies from the list, 25 per call, `startDate`
+set to the last check, `maxResultsPerSignal` set to 3. It bills 1 credit per event
+returned plus 1, so the ceiling is employers × the cap + 1: quote that, keep the
+cap low, and report the `billing.creditsCharged` the response returns.
+
+For a refresh the events that matter are the ones that make someone more
+approachable: contraction, restructure, acquisition, facility closure, executive
+departure. A hiring surge is worth reporting but it is weaker.
+
+Two things to check before reporting any of it. The employer that came back has to
+be the employer on the pipeline, per SHARED-REFERENCE section 6b. And `startDate`
+filters on when the article was published rather than when the event happened, so
+keep an event only if `eventEffectiveDate` exists and falls inside the window.
+Case-normalise `jobTitle.seniority` when you compare a pipeline read against a
+search, because the same field comes back capitalised from one and lower-case from
+the other.
+
+## Step 5. Who newly became approachable
+
+This is the step that earns the skill, and it is one call.
+
+Bracket the window between the recruiter's last check and today, using both bounds
+of the job-change date. For a two-year threshold and a last check on 24 September:
+
+```json
+"jobChangedAfterDate": "<last check minus 2 years>",
+"exclude": { "contacts": { "jobChangedAfterDate": "<today minus 2 years>" } }
+```
+
+Everyone returned changed job inside that one-month band two years ago, which is
+exactly the set that crossed the two-year threshold since the recruiter last
+looked.
+
+Verified twice, exactly, on two different populations for one search credit each.
+German engineering directors: 21,892 at the older threshold and 22,213 at the
+newer, and the bracket returned 321. UK senior engineering: 136,500 and 138,742,
+and the bracket returned 2,242. Both match the difference to the person.
+
+Run step 3a's level post-filter and the id dedupe on this output too. It draws
+from the same index, so it carries the same off-level records and the same
+duplicates.
+
+**Do not re-run the full search and diff it against the pipeline.** That was the
+earlier instruction and it is the expensive way to the same answer. Finding 321
+people inside 22,000 rows means paging hundreds of times. The bracket asks the API
+for the cohort directly.
+
+Do not try to calculate this from stored dates either. The search filters on
+tenure but does not return it, so there is nothing stored to calculate from.
+
+If you do not know the last check date, ask, or default to one month and say so.
+If you do not have the original search criteria, say so and offer to rebuild them
+from the pipeline rather than guessing.
+
+## Step 6. Order the diff
+
+Per SHARED-REFERENCE section 6, adapted: order by how much each change matters to
+a recruiter, not by the order the signals came back.
+
+Someone who changed company outranks someone whose employer posted a job. Recency
+breaks ties.
+
+## Step 7. Answer
+
+**Report only what changed.** Group by type, and put a date on every entry.
 
 > Four changes on your Berlin Backend pipeline since 2 July.
 >
 > **Moved company (2)**
-> Anna Weber left Delivery Hero for Zalando, 4 August. Worth a fresh look, she is only two months in.
+> Anna Weber left Delivery Hero for Zalando, 4 August. Worth a fresh look, she is
+> only two months in.
 > Tomas Novak moved to N26 as Staff Engineer, 22 July.
 >
 > **Promoted (1)**
 > Lukas Bauer is now Engineering Manager at Trade Republic, 1 August.
 >
 > **Newly approachable (3)**
-> Three candidates have now passed two years in seat: Maria Silva, Jonas Klein and Petra Hoffmann. All three were too fresh when you built this pipeline.
+> Three candidates have now passed two years in seat: Maria Silva, Jonas Klein and
+> Petra Hoffmann. All three were too fresh when you built this pipeline.
 >
 > **Employer news (1)**
 > Zalando cut headcount 3% in July, which affects four candidates here.
@@ -58,32 +167,81 @@ Do not try to calculate this from stored dates. The search filters on tenure but
 >
 > That was 4 credits to read the pipeline and 7 signal credits.
 
-That closing count line matters. Without it the recruiter cannot tell whether you checked everyone or ran out of budget. Then offer: open anyone worth acting on, take candidates off, add a column.
+That closing count line matters. Without it the recruiter cannot tell whether you
+checked everyone or ran out of budget.
 
-**Working the pipeline.** The recruiter can curate in conversation instead of going to the UI. Take candidates off with `list_remove_candidates`, naming them back first because there is no undo through the API: "Removing Anna Weber, Tomas Novak and Lukas Bauer from Berlin Backend. Confirm?" Rename with `list_update`, which is metadata only and does not touch contents. Add a column with `list_add_column`, after `list_columns` so you do not create a duplicate, since a recruiter-owned column like Notes or Stage is what turns a saved list into a working pipeline. Populate a column with `list_run_column`, then poll `list_run_status` because runs are asynchronous.
+Then offer: open anyone worth acting on, take people off, add a column.
 
-> `list_run_column` on a reveal column is the only call in this plugin that can spend at list scale. An email column across 500 rows is 500 credits in one call. Phone is five each. State the per-row cost, get an explicit yes, and scope to selected rows if the API allows it. Never run one as a side effect of a request for something else.
+## Working the list
 
-If a run partially completes, report which rows populated and what was charged. Never re-run the whole column to fix a partial result.
+The recruiter can curate in conversation instead of going to the UI.
 
-**The durable refresh, if it turns out to be possible.** If a column can carry a Lusha signal, then the whole refresh can live in the list: add the column once, re-run it against the saved rows whenever the recruiter wants, and the result persists in their workspace instead of vanishing with the conversation. That is a better product than a chat answer. Nobody has established that signal columns exist. That question is being measured internally. Until it comes back, run the flow above and do not promise the in-list version.
+**Take people off.** `list_remove_candidates`. **Name them back first**, because
+there is no undo through the API. "Removing Anna Weber, Tomas Novak and Lukas
+Bauer from Berlin Backend. Confirm?"
 
-**Never, in this skill:** re-list the whole roster, since the point is the diff; reveal anything during a refresh; pull a 200-row list into the conversation to answer "what changed"; tell the recruiter reading the pipeline back is free; remove anyone without naming them first; run a reveal column without an explicit yes and a stated cost; send an `email` parameter to any `list_*` tool; hardcode the signal types instead of calling `candidate_change_filters`; call one named person talent, because talent is the pipeline and candidate is the person.
+**Rename.** `list_update`. Metadata only, it does not touch contents.
+
+**Add a column.** `list_add_column`, after `list_columns` so you do not
+create a duplicate. A recruiter-owned column like Notes or Stage turns the list
+into a working pipeline.
+
+**Populate a column.** `list_run_column`, then poll `list_run_status` because runs
+are asynchronous.
+
+> **`list_run_column` on a reveal column is the only call in this plugin that can
+> spend at list scale.** An email column across 500 rows is 500 credits in one
+> call. Phone is five each. State the per-row cost, get an explicit yes, and scope
+> to selected rows if the API allows it. Never run one as a side effect of a
+> request for something else.
+
+If a run partially completes, report which rows populated and what was charged.
+Never re-run the whole column to fix a partial result.
+
+## The durable refresh, if it turns out to be possible
+
+If a column can carry a Lusha signal, then the whole refresh can live in the
+table: add the column once, re-run it against the saved rows whenever the
+recruiter wants, and the result persists in their workspace instead of vanishing
+with the conversation. That is a better product than a chat answer.
+
+**Nobody has established that signal columns exist.** It is being measured in
+INF-3038. Until it comes back, run the flow above and do not promise the in-table
+version.
+
+## Never, in this skill
+
+- Re-list the whole roster. The point is the diff.
+- Reveal anything during a refresh.
+- Pull a 200-row list into the conversation to answer "what changed".
+- Tell the recruiter reading the list back is free.
+- Re-run the whole position search and diff it to find the newly approachable.
+  Bracket it instead.
+- Run employer events without setting `maxResultsPerSignal`. It is the price of
+  the call, not a response-size limit.
+- Leave `maxResultsPerSignal` at its default on a large employer set.
+- Remove anyone without naming them first.
+- Run a reveal column without an explicit yes and a stated cost.
+- Send an `email` parameter to any `list_*` tool.
 
 ## Worked example
 
 **Recruiter:** what's changed on my Berlin list?
 
-**You:** Berlin Backend, 80 people, last checked 2 July. Reading it back is 4 credits, then signal checks on top. Running it.
+**You:** Berlin Backend, 80 people, last checked 2 July. Reading it back is 4
+credits, then signal checks on top. Running it.
 
-_(list_find, list_read paged, candidate_change_filters, candidate_changes, employer_events, tenure re-run, order the diff)_
+*(list_find, list_read paged, signals on people, signals on companies, one
+bracketed tenure search, order the diff)*
 
-**You:** _(the grouped diff above)_
+**You:** *(the grouped diff above)*
 
 **Recruiter:** take the three who moved off the list
 
-**You:** Removing Anna Weber, Tomas Novak and Lukas Bauer from Berlin Backend. There is no undo, confirm?
+**You:** Removing Anna Weber, Tomas Novak and Lukas Bauer from Berlin Backend.
+There is no undo, confirm?
 
 **Recruiter:** yes
 
-**You:** Done, 77 candidates left in that pipeline. Want me to add the three newly approachable ones in their place?
+**You:** Done, 77 people left. Want me to add the three newly approachable ones in
+their place?

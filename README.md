@@ -59,14 +59,15 @@ store.
 
 ```
 /plugin marketplace add lusha-oss/lusha-mcp-hr-plugin
-/plugin install lusha-hr
+/plugin install lusha-talent-sourcing
 ```
 
 ### Cursor
 
 Cursor reads `.cursor-plugin/plugin.json` and discovers the bundled `skills/`
 automatically. Add the repo as a plugin marketplace, then install from
-`.cursor-plugin/marketplace.json` (catalog `lusha-recruiting-plugins`, plugin `lusha-hr`).
+`.cursor-plugin/marketplace.json` (catalog `lusha-recruiting-plugins`, plugin
+`lusha-talent-sourcing`).
 
 ### Codex
 
@@ -159,12 +160,13 @@ These are display-only fields, owned by Marketing, and all three live in
 
 | Field | Current value |
 |-------|---------------|
-| `display.displayName` | `Lusha for Recruiting` |
-| `display.shortDescription` | `Source talent and keep a talent pipeline live` |
+| `display.displayName` | `Lusha Talent Sourcing` |
+| `display.shortDescription` | `Source passive candidates with verified emails, phone numbers, and career-move signals` |
 | `display.category` | `Recruiting` — confirm against each host's accepted category list at submission |
 
-The machine name is `lusha-hr` and does **not** change: renaming it after install breaks
-existing installs.
+The machine name is `lusha-talent-sourcing`. It was `lusha-hr` in 0.1.0, so anyone who
+installed that version reinstalls rather than updates. Treat it as fixed from here:
+renaming it again after install breaks existing installs.
 
 ## License
 

@@ -80,10 +80,10 @@ Confirm the current values with `employer_event_filters` first, then
 `12m`, `riskNews`, `corporateStrategyNews`. Then feed those companies into the
 search.
 
-Skip this for a normal position brief. The cost is not predictable from the
-employer count, and employers that return nothing are billed the same as
-employers that return five, so it spends on something they did not ask for.
-SHARED-REFERENCE section 3.
+Skip this for a normal position brief. It bills 1 credit per event returned plus
+1 for the request, so twenty-five employers at the default cap can cost more than
+the search that found them, on something they did not ask for. SHARED-REFERENCE
+section 3.
 
 ## Step 3. Search the talent pool
 
@@ -130,10 +130,10 @@ If they asked for a band, for example director and above, keep the whole band.
 `employer_events` on the companies in your shortlist, not on every
 company in the result set.
 
-**Set `maxResultsPerSignal` to 3.** The cost of this call is not predictable from
-the employer count, and that parameter is the only lever on the upper bound. Ten
-employers at 10 per signal came back at 40 credits. Three events per employer is
-enough to spot a leadership change. Quote a range, then report the
+**Set `maxResultsPerSignal` to 3.** The call bills 1 credit per event returned
+plus 1, so that parameter is the price: the same ten employers cost 40 credits at
+the default and 15 at a cap of 3. Three events per employer is enough to spot a
+leadership change. Quote the ceiling, employers × the cap + 1, then report the
 `billing.creditsCharged` the response returns. SHARED-REFERENCE section 3.
 
 Verify the employer that comes back is the employer you asked about before you

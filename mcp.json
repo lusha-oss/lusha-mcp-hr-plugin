@@ -5,7 +5,7 @@
       "url": "https://mcp-hr.lusha.com/mcp/codex",
       "headers": {
         "X-Lusha-Plugin": "codex-hr",
-        "X-Lusha-Plugin-Version": "0.2.0"
+        "X-Lusha-Plugin-Version": "0.2.1"
       }
     }
   }

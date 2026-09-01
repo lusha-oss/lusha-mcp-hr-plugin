@@ -10,7 +10,7 @@
     {
       "name": "lusha-talent-sourcing",
       "source": "./",
-      "version": "0.2.0",
+      "version": "0.2.1",
       "description": "Lusha Talent Sourcing: Source passive candidates with verified emails, phone numbers, and career-move signals.",
       "author": {
         "name": "Lusha"

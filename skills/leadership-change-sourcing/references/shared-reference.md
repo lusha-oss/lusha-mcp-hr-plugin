@@ -112,7 +112,7 @@ spent something. Quote in credits, never in money.
 | `candidate_change_filters`, `employer_event_filters` | Free. Call them rather than hardcoding signal types |
 | `list_find` | Free |
 | Candidate or company search | A search credit per request, per 25 results returned |
-| Employer events | **Not predictable. Measured four times and no formula fits.** 25 employers and 13 events cost 25. 10 employers and 6 events cost 10. 3 employers and 1 event cost 2. 10 employers and 39 events cost 40. Control it with `maxResultsPerSignal` and read `billing.creditsCharged` off the response |
+| Employer events | **1 per event returned, plus 1 for the request.** 5 events cost 6, 14 cost 15, 39 cost 40. The ceiling is employers × `maxResultsPerSignal` + 1. Employers that return nothing add nothing |
 | Candidate changes | Assume the same, and read the actual charge back |
 | Lookalikes | Per result |
 | `list_read` | **1 credit per 25 rows**, even though nothing is revealed |
@@ -125,19 +125,19 @@ spent something. Quote in credits, never in money.
 the column admin tools are believed free but have not been measured. Do not
 promise a recruiter they are free. Say "no reveal credits" instead.
 
-**Employer events are the one cost you cannot quote as a number, so quote a range
-and then report the truth.** Four live measurements fit no formula: sometimes the
-charge tracks the employer count, once it tracked the event count almost exactly,
-once it was below both. What is certain is that empty employers are billed and
-that the charge can exceed the number of employers by four times.
+**Employer events bill 1 credit per event returned, plus 1 for the request.**
+Measured on three identical requests to the same ten employers over the same
+window, varying only the cap: 5 events cost 6 credits, 14 cost 15, 39 cost 40.
+The charge follows the events and not the employers, so an employer that returns
+nothing adds nothing.
 
-Two things follow. **Set `maxResultsPerSignal` deliberately**, because it is the
-only lever on the upper bound: at 10 per employer, ten employers cost 40 credits;
-at 3 it could not have exceeded 30 and would probably have been far less. Three
-events per employer is enough to spot a leadership change. And **report
-`billing.creditsCharged` from the response** rather than your own estimate, every
-time. Say "that came back at 40 credits, more than I quoted" if that is what
-happened. Never sweep 200 companies speculatively.
+Two things follow. **Set `maxResultsPerSignal` deliberately**, because it is what
+sets the price: those same ten employers cost 40 credits at the default of 10 and
+15 at a cap of 3. Three events per employer is enough to spot a leadership
+change. The ceiling before you call is employers × the cap + 1, so you can quote
+a real number rather than a guess. And **report `billing.creditsCharged` from the
+response** rather than your own estimate, every time. Never sweep 200 companies
+speculatively.
 
 ---
 
@@ -192,9 +192,10 @@ These are not preferences. Breaking any of them is a defect.
 19. **Never present an employer event from its `eventSummary` alone.** The summary
     is generated text and it misattributes roles. Read `articleTitle` and
     `articleHighlight` first. See section 6e.
-20. **Never quote an employer-event cost as a fixed number.** Set
-    `maxResultsPerSignal`, quote a range, and report the charge the response
-    actually returns. See section 3.
+20. **Never run employer events without setting `maxResultsPerSignal`.** It is
+    the price of the call, not a response-size limit: 1 credit per event returned
+    plus 1, so the ceiling is employers × the cap + 1. Quote that, then report
+    the charge the response actually returns. See section 3.
 
 ---
 

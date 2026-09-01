@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "lusha-talent-sourcing",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Lusha Talent Sourcing: Source passive candidates with verified emails, phone numbers, and career-move signals.",
   "author": {
     "name": "Lusha",
@@ -29,7 +29,7 @@
       "url": "https://mcp-hr.lusha.com/mcp/claude",
       "headers": {
         "X-Lusha-Plugin": "claude-hr",
-        "X-Lusha-Plugin-Version": "0.2.0"
+        "X-Lusha-Plugin-Version": "0.2.1"
       }
     }
   }

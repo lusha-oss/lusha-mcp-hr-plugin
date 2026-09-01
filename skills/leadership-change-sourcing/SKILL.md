@@ -64,14 +64,12 @@ from the tool, never from this file.
 25 companies per call. `startDate` set to the window. **Set `maxResultsPerSignal`
 to 3.**
 
-The cost of this call cannot be predicted from the employer count. Four live
-measurements: 25 employers and 13 events cost 25 credits, 10 employers and 6
-events cost 10, 3 employers and 1 event cost 2, and 10 employers and 39 events
-cost 40. No formula fits all four. `maxResultsPerSignal` is the only lever on the
-upper bound, and three events per employer is plenty, because you are looking for
-one leadership change rather than a news digest. Quote a range before you run it,
-then report the `billing.creditsCharged` the response returns, even when it is
-higher than what you quoted.
+This call bills 1 credit per event returned plus 1 for the request: 5 events cost
+6 credits, 14 cost 15, 39 cost 40. `maxResultsPerSignal` is therefore the price,
+and three events per employer is plenty, because you are looking for one
+leadership change rather than a news digest. The ceiling is employers × the cap
++ 1, so quote that before you run it, then report the `billing.creditsCharged`
+the response returns.
 
 ## Step 2a. Check you got the right company
 

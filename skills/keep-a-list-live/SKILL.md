@@ -38,9 +38,9 @@ Only ask what you cannot infer:
 Then say what you are about to read and what it costs, before reading it:
 
 > Your Berlin Backend list has 80 people. Reading it back costs 4 credits, then
-> checking for movement costs credits per person and per employer, and empty
-> results are still billed. I would expect somewhere between 30 and 60 in total
-> and I will tell you the exact number afterwards. Go ahead?
+> checking for movement bills per event found plus one per request, so the cap I
+> set is what bounds it. I would expect somewhere between 30 and 60 in total and
+> I will tell you the exact number afterwards. Go ahead?
 
 For a small list just say it and proceed. For a large one, wait.
 
@@ -81,9 +81,9 @@ name plus company.
 ## Step 4. What happened at their employers
 
 `employer_events` on the companies from the list, 25 per call, `startDate`
-set to the last check, `maxResultsPerSignal` set to 3. The cost is not predictable
-from the employer count, so quote a range, keep the cap low, and report the
-`billing.creditsCharged` the response returns.
+set to the last check, `maxResultsPerSignal` set to 3. It bills 1 credit per event
+returned plus 1, so the ceiling is employers × the cap + 1: quote that, keep the
+cap low, and report the `billing.creditsCharged` the response returns.
 
 For a refresh the events that matter are the ones that make someone more
 approachable: contraction, restructure, acquisition, facility closure, executive
@@ -217,8 +217,8 @@ version.
 - Tell the recruiter reading the list back is free.
 - Re-run the whole position search and diff it to find the newly approachable.
   Bracket it instead.
-- Quote an employer-event cost as a fixed number. It is not predictable; give a
-  range and report the actual charge.
+- Run employer events without setting `maxResultsPerSignal`. It is the price of
+  the call, not a response-size limit.
 - Leave `maxResultsPerSignal` at its default on a large employer set.
 - Remove anyone without naming them first.
 - Run a reveal column without an explicit yes and a stated cost.

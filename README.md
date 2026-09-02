@@ -161,8 +161,12 @@ These are display-only fields, owned by Marketing, and all three live in
 | Field | Current value |
 |-------|---------------|
 | `display.displayName` | `Lusha Talent Sourcing` |
-| `display.shortDescription` | `Source passive candidates with verified emails, phone numbers, and career-move signals` |
-| `display.category` | `Recruiting` — confirm against each host's accepted category list at submission |
+| `display.shortDescription` | `Find best-fit talent, get verified contact details, and see who may be open to a move` |
+| `display.category` | `Productivity + data` — confirm against each host's accepted category list at submission |
+| `descriptionTemplate` | The store-listing copy. It reaches Codex as `interface.longDescription` and Gemini as the manifest `description`; every other manifest gets the one-liner instead |
+
+The long copy is written by Marketing but still passes the vocabulary gate above, so a
+draft saying "seniority" or "contact data" comes back as `level` and `contact details`.
 
 The machine name is `lusha-talent-sourcing`. It was `lusha-hr` in 0.1.0, so anyone who
 installed that version reinstalls rather than updates. Treat it as fixed from here:

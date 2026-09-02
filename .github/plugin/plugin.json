@@ -1,7 +1,7 @@
 {
   "name": "lusha-talent-sourcing",
-  "version": "0.2.1",
-  "description": "Lusha Talent Sourcing: Source passive candidates with verified emails, phone numbers, and career-move signals.",
+  "version": "0.2.2",
+  "description": "Lusha Talent Sourcing: Find best-fit talent, get verified contact details, and see who may be open to a move.",
   "author": {
     "name": "Lusha",
     "email": "support@lusha.com",
@@ -29,7 +29,7 @@
       "url": "https://mcp-hr.lusha.com/mcp/copilot",
       "headers": {
         "X-Lusha-Plugin": "copilot-hr",
-        "X-Lusha-Plugin-Version": "0.2.1"
+        "X-Lusha-Plugin-Version": "0.2.2"
       }
     }
   }

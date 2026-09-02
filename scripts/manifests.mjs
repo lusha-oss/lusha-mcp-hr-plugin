@@ -37,10 +37,11 @@ export const describeFor = (config, client) =>
     .replaceAll('{{surface}}', client.surface);
 
 // The plugin manifest's `description` is a brief, user-facing one-liner — Claude Code's
-// install validation caps it at 500 characters, and the ~1,400-character descriptionTemplate
+// install validation caps it at 500 characters, and the ~2,000-character descriptionTemplate
 // is written for a marketplace listing, not a manifest field. Codex already split these two
 // (a short top-level `description` plus `interface.longDescription`); this brings the other
 // clients' plugin manifests in line with that rather than handing all of them the long copy.
+// Gemini is the exception — see the note on its artifact below.
 export const briefDescriptionFor = (config) =>
   `${config.display.displayName}: ${config.display.shortDescription}.`;
 
@@ -110,10 +111,13 @@ export function buildArtifacts(config = loadConfig()) {
     mcpServers: serverEntryFor(config, copilot),
   }));
 
+  // Gemini has no listing fields at all: geminicli.com renders this one `description` and
+  // nothing else, so a one-liner here is the whole store page. It takes the long copy,
+  // as the sales extension does.
   artifacts.set(gemini.manifest, json({
     name,
     version,
-    description: briefDescriptionFor(config),
+    description: describeFor(config, gemini),
     mcpServers: serverEntryFor(config, gemini),
   }));
 

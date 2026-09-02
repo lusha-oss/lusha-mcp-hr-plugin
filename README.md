@@ -58,7 +58,7 @@ store.
 ### Claude Code (CLI / Cowork)
 
 ```
-/plugin marketplace add lusha-oss/lusha-mcp-hr-plugin
+/plugin marketplace add lusha-oss/lusha-mcp-talent-sourcing-plugin
 /plugin install lusha-talent-sourcing
 ```
 
@@ -79,7 +79,7 @@ during install ([codex#18863](https://github.com/openai/codex/issues/18863)); cl
 `url` keeps `skills/` as real files at the plugin root.
 
 ```
-codex plugin marketplace add lusha-oss/lusha-mcp-hr-plugin
+codex plugin marketplace add lusha-oss/lusha-mcp-talent-sourcing-plugin
 codex
 /plugins
 ```
@@ -92,12 +92,12 @@ Requires a VS Code version with agent-plugin support and the GitHub Copilot exte
 
 1. Open the **Command Palette** (`Cmd+Shift+P` / `Ctrl+Shift+P`).
 2. Run **Chat: Install Plugin From Source**.
-3. Paste the repository name: `lusha-oss/lusha-mcp-hr-plugin`.
+3. Paste the repository name: `lusha-oss/lusha-mcp-talent-sourcing-plugin`.
 
 ### Gemini CLI
 
 ```
-gemini extensions install https://github.com/lusha-oss/lusha-mcp-hr-plugin
+gemini extensions install https://github.com/lusha-oss/lusha-mcp-talent-sourcing-plugin
 ```
 
 ## Editing this repo

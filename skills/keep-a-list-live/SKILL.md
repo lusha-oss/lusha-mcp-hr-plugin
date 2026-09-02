@@ -89,10 +89,17 @@ For a refresh the events that matter are the ones that make someone more
 approachable: contraction, restructure, acquisition, facility closure, executive
 departure. A hiring surge is worth reporting but it is weaker.
 
-Two things to check before reporting any of it. The employer that came back has to
-be the employer on the pipeline, per SHARED-REFERENCE section 6b. And `startDate`
+Three things to check before reporting any of it. The employer that came back has
+to be the employer on the pipeline, per SHARED-REFERENCE section 6b. `startDate`
 filters on when the article was published rather than when the event happened, so
 keep an event only if `eventEffectiveDate` exists and falls inside the window.
+And never report an event from its `eventSummary`: the summary attaches a person
+and a role to whichever tracked company the article names, even when that company
+is only somebody's former employer, so read `articleTitle` and `articleHighlight`
+and describe the event yourself. If the article turns out to be about a different
+company, the event is not news about this pipeline. Section 6e has the three
+verdicts.
+
 Case-normalise `jobTitle.seniority` when you compare a pipeline read against a
 search, because the same field comes back capitalised from one and lower-case from
 the other.

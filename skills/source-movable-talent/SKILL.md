@@ -137,9 +137,12 @@ leadership change. Quote the ceiling, employers × the cap + 1, then report the
 `billing.creditsCharged` the response returns. SHARED-REFERENCE section 3.
 
 Verify the employer that comes back is the employer you asked about before you
-report anything attached to it, per SHARED-REFERENCE section 6b, and read
-`articleTitle` and `articleHighlight` rather than `eventSummary` before you
-describe any event, per section 6e.
+report anything attached to it, per SHARED-REFERENCE section 6b. Then read
+`articleTitle` and `articleHighlight` rather than `eventSummary` and decide for
+yourself what the event is, per section 6e. The summary attaches a person and a
+role to whichever tracked company the article names, so an employer that appears
+only as somebody's former company has no event. A candidate's "why now" has to
+come from something that actually happened at the company they work at today.
 
 This is where the "why now" comes from, and it is the difference between this and
 a LinkedIn search.
@@ -213,6 +216,8 @@ too narrow. Widen the filters instead; that is free to retry.
 - Present the same candidate twice because they came back under two employers.
 - Report a signal against a company without checking which entity came back.
 - Describe an event from its `eventSummary` without reading the article text.
+- Give someone a "why now" from an event the article attaches to a different
+  company, or to a company they used to work at.
 - Call one named person talent because they matched a filter.
 - Send an `email` parameter to any `list_*` tool.
 

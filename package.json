@@ -1,6 +1,6 @@
 {
-  "name": "lusha-mcp-hr-plugin",
-  "version": "0.2.1",
+  "name": "lusha-mcp-talent-sourcing-plugin",
+  "version": "0.2.2",
   "private": true,
   "description": "Build and validation scripts for the Lusha recruiting plugin. The plugin itself is manifests and skill text; nothing here ships to a host.",
   "type": "module",

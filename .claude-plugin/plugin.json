@@ -1,15 +1,15 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "lusha-talent-sourcing",
-  "version": "0.2.1",
-  "description": "Lusha Talent Sourcing: Source passive candidates with verified emails, phone numbers, and career-move signals.",
+  "version": "0.2.2",
+  "description": "Lusha Talent Sourcing: Find best-fit talent, get verified contact details, and see who may be open to a move.",
   "author": {
     "name": "Lusha",
     "email": "support@lusha.com",
     "url": "https://www.lusha.com"
   },
   "homepage": "https://www.lusha.com",
-  "repository": "https://github.com/lusha-oss/lusha-mcp-hr-plugin",
+  "repository": "https://github.com/lusha-oss/lusha-mcp-talent-sourcing-plugin",
   "license": "MIT",
   "keywords": [
     "lusha",
@@ -29,7 +29,7 @@
       "url": "https://mcp-hr.lusha.com/mcp/claude",
       "headers": {
         "X-Lusha-Plugin": "claude-hr",
-        "X-Lusha-Plugin-Version": "0.2.1"
+        "X-Lusha-Plugin-Version": "0.2.2"
       }
     }
   }

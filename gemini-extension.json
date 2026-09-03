@@ -1,13 +1,13 @@
 {
   "name": "lusha-talent-sourcing",
-  "version": "0.2.1",
-  "description": "Lusha Talent Sourcing: Source passive candidates with verified emails, phone numbers, and career-move signals.",
+  "version": "0.2.2",
+  "description": "Lusha Talent Sourcing is an AI-powered talent sourcing and candidate data platform for recruiters, sourcers, and talent acquisition teams. It helps answer two critical recruiting questions: Who is the best-fit talent for this role, and when might the timing be right to reach out?\n\nFind and source passive candidates based on job title, skills, level, company, industry, location, and other criteria relevant to your search. Use natural-language candidate search to narrow a broad talent pool to the people who best match your hiring needs.\n\nGo beyond candidate discovery with verified contact details, including emails and phone numbers, so you can connect directly with the right talent. Then use candidate mobility and career-move signals, including tenure in the current role, a change in direct manager, and declining headcount at the current company, to understand when someone may be more open to a new opportunity.\n\nUse Lusha for talent sourcing, candidate sourcing, passive candidate search, talent search, candidate discovery, technical recruiting, executive search, outbound recruiting, recruitment sourcing, candidate contact information enrichment, recruiting intelligence, and talent intelligence.\n\nWhether you're hiring software engineers, sales leaders, executives, specialists, or other hard-to-reach talent, Lusha helps you find the right candidates, understand when the timing may be right, and reach them directly with verified contact details.\n\nUnlike recruiting tools built around a single closed workflow, Lusha is designed as a recruiting-specific data layer that can work across the tools and AI assistants recruiters already use.\n\nFor teams looking for a LinkedIn Recruiter alternative for candidate sourcing and recruiting data, or evaluating platforms such as SeekOut, hireEZ, Gem, ContactOut, ZoomInfo TalentOS, Apollo, Juicebox (PeopleGPT), Pin, or HeroHunt, Lusha Talent Sourcing brings candidate search, verified contact details, and mobility signals together in one flexible data layer.\n\nFind the right talent. Understand the right time. Reach them wherever you work.\n\nAn active Lusha account is required to access enriched data.",
   "mcpServers": {
     "lusha-talent-sourcing": {
       "httpUrl": "https://mcp-hr.lusha.com/mcp/gemini",
       "headers": {
         "X-Lusha-Plugin": "gemini-hr",
-        "X-Lusha-Plugin-Version": "0.2.1"
+        "X-Lusha-Plugin-Version": "0.2.2"
       }
     }
   }

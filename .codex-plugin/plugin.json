@@ -1,14 +1,14 @@
 {
   "name": "lusha-talent-sourcing",
-  "version": "0.2.1",
-  "description": "Lusha Talent Sourcing: Source passive candidates with verified emails, phone numbers, and career-move signals.",
+  "version": "0.2.2",
+  "description": "Lusha Talent Sourcing: Find best-fit talent, get verified contact details, and see who may be open to a move.",
   "author": {
     "name": "Lusha",
     "email": "support@lusha.com",
     "url": "https://www.lusha.com"
   },
   "homepage": "https://www.lusha.com",
-  "repository": "https://github.com/lusha-oss/lusha-mcp-hr-plugin",
+  "repository": "https://github.com/lusha-oss/lusha-mcp-talent-sourcing-plugin",
   "license": "MIT",
   "keywords": [
     "lusha",
@@ -26,10 +26,10 @@
   "mcpServers": "./mcp.json",
   "interface": {
     "displayName": "Lusha Talent Sourcing",
-    "shortDescription": "Source passive candidates with verified emails, phone numbers, and career-move signals",
-    "longDescription": "Lusha Talent Sourcing helps recruiters and talent acquisition teams find, qualify, and connect with the right candidates directly from their AI workflow.\nSource passive talent, build targeted candidate lists, uncover verified contact information, and use career-move signals to identify candidates who may be more open to a new opportunity.\n\nWhether you're hiring software engineers, sales leaders, executives, or other hard-to-reach talent, Lusha gives you the data and signals you need to move from candidate search to outreach faster.\n\nWhat you can do with Lusha Talent Sourcing:\n\n- Find and source candidates: Search for relevant candidates by job title, skills, level, company, industry, location, and other criteria.\n- Build targeted candidate lists: Turn your ideal candidate profile into focused sourcing lists without leaving your AI conversation.\n- Get verified contact information: Access verified emails and phone numbers so you can reach candidates directly.\n- Identify candidates ready to move: Use career-move and recruiting signals to prioritize people who may be more likely to consider a new opportunity.\n- Speed up recruiting workflows: Go from candidate discovery to a qualified outreach list in fewer steps.\n\nBuilt for recruiters, sourcers, and talent acquisition teams who want a faster way to find passive candidates and turn AI-powered searches into actionable recruiting pipelines.\n\nAn active Lusha account is required to access enriched data.",
+    "shortDescription": "Find best-fit talent, get verified contact details, and see who may be open to a move",
+    "longDescription": "Lusha Talent Sourcing is an AI-powered talent sourcing and candidate data platform for recruiters, sourcers, and talent acquisition teams. It helps answer two critical recruiting questions: Who is the best-fit talent for this role, and when might the timing be right to reach out?\n\nFind and source passive candidates based on job title, skills, level, company, industry, location, and other criteria relevant to your search. Use natural-language candidate search to narrow a broad talent pool to the people who best match your hiring needs.\n\nGo beyond candidate discovery with verified contact details, including emails and phone numbers, so you can connect directly with the right talent. Then use candidate mobility and career-move signals, including tenure in the current role, a change in direct manager, and declining headcount at the current company, to understand when someone may be more open to a new opportunity.\n\nUse Lusha for talent sourcing, candidate sourcing, passive candidate search, talent search, candidate discovery, technical recruiting, executive search, outbound recruiting, recruitment sourcing, candidate contact information enrichment, recruiting intelligence, and talent intelligence.\n\nWhether you're hiring software engineers, sales leaders, executives, specialists, or other hard-to-reach talent, Lusha helps you find the right candidates, understand when the timing may be right, and reach them directly with verified contact details.\n\nUnlike recruiting tools built around a single closed workflow, Lusha is designed as a recruiting-specific data layer that can work across the tools and AI assistants recruiters already use.\n\nFor teams looking for a LinkedIn Recruiter alternative for candidate sourcing and recruiting data, or evaluating platforms such as SeekOut, hireEZ, Gem, ContactOut, ZoomInfo TalentOS, Apollo, Juicebox (PeopleGPT), Pin, or HeroHunt, Lusha Talent Sourcing brings candidate search, verified contact details, and mobility signals together in one flexible data layer.\n\nFind the right talent. Understand the right time. Reach them wherever you work.\n\nAn active Lusha account is required to access enriched data.",
     "developerName": "Lusha",
-    "category": "Recruiting",
+    "category": "Productivity + data",
     "capabilities": [
       "Interactive",
       "Read"

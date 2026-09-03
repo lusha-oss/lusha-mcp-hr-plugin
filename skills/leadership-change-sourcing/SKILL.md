@@ -104,15 +104,29 @@ The API window does not do it for you, and roughly two thirds of what comes back
 will not survive this step. Measured on a 39-event sample across five employers,
 plus an earlier 13-event sample.
 
-**Read the article, not the summary.** `eventSummary` is generated text and it
-misattributes roles. One event read "Andrea D'Amico leaves Booking.com Limited as
-CEO"; the article says he is the chief executive of WeRoad, a former Booking
-executive, moving to head hotels at Airbnb. He was never Booking's CEO. Another
-read "N26 hired Gino as CTO on Jul 1st '19", which is a biographical sentence
-inside an article about that person leaving in 2026. Check every summary against
-`articleTitle` and `articleHighlight`, describe the event in your own words, and
-drop it if the article does not support a leadership change at the employer you
-asked about.
+**Read the article and decide for yourself.** `eventSummary` binds the wrong
+company. One event read "Andrea D'Amico leaves Booking.com Limited as CEO"; the
+article is about WeRoad, he is WeRoad's chief executive, Booking is where he used
+to work, and he is stepping back from WeRoad to head hotels at Airbnb while
+keeping a board seat. Another read "N26 hired Gino as CTO on Jul 1st '19", which
+is a biographical sentence inside an article about that person leaving in 2026.
+
+So the summary is a hint, not a finding. Read `articleTitle` and
+`articleHighlight`, work out what happened, to whom and at which company, and
+pick one of three verdicts. This is the most important judgement in the skill.
+
+1. **It is a real change at the employer you asked about.** Report it in your own
+   words, with the role, the direction and the date the article gives. Stepping
+   back while keeping a board seat is not leaving; say what actually happened.
+2. **It belongs to another company and your employer is only history.** A "former
+   X" phrase is a past employer, not a current role, so there is no event at your
+   employer. Say so and do not count it. If the company the article is really
+   about is on the recruiter's list, report it there instead.
+3. **The text does not say which company the role belongs to.** Drop it, say you
+   dropped one as unverifiable, and do not reason your way to a company the
+   sentence never names.
+
+Full mechanism and the clause test in SHARED-REFERENCE section 6e.
 
 **Keep an event only if `eventEffectiveDate` exists and falls inside the window
 the recruiter asked for.** Null effective dates ran at 6 of 39 in one sample and 4
@@ -238,6 +252,10 @@ triggers is just a filtered search wearing this skill's name.
 - Count a brand ambassador, an advisory board seat or a supervisory board
   appointment as an executive hire.
 - Describe an event from its `eventSummary` without reading the article text.
+- Report an event against a company the article mentions only as somebody's
+  former employer.
+- Present an event whose company the article text does not actually establish.
+  Unverifiable is a verdict, and saying you dropped one is part of the answer.
 - Pick one date silently when duplicates of the same event disagree.
 - Quote the event cost as a fixed number, or leave `maxResultsPerSignal` at its
   default across a large employer set.

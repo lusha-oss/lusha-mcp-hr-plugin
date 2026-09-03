@@ -58,7 +58,7 @@ store.
 ### Claude Code (CLI / Cowork)
 
 ```
-/plugin marketplace add lusha-oss/lusha-mcp-hr-plugin
+/plugin marketplace add lusha-oss/lusha-mcp-talent-sourcing-plugin
 /plugin install lusha-talent-sourcing
 ```
 
@@ -79,7 +79,7 @@ during install ([codex#18863](https://github.com/openai/codex/issues/18863)); cl
 `url` keeps `skills/` as real files at the plugin root.
 
 ```
-codex plugin marketplace add lusha-oss/lusha-mcp-hr-plugin
+codex plugin marketplace add lusha-oss/lusha-mcp-talent-sourcing-plugin
 codex
 /plugins
 ```
@@ -92,12 +92,12 @@ Requires a VS Code version with agent-plugin support and the GitHub Copilot exte
 
 1. Open the **Command Palette** (`Cmd+Shift+P` / `Ctrl+Shift+P`).
 2. Run **Chat: Install Plugin From Source**.
-3. Paste the repository name: `lusha-oss/lusha-mcp-hr-plugin`.
+3. Paste the repository name: `lusha-oss/lusha-mcp-talent-sourcing-plugin`.
 
 ### Gemini CLI
 
 ```
-gemini extensions install https://github.com/lusha-oss/lusha-mcp-hr-plugin
+gemini extensions install https://github.com/lusha-oss/lusha-mcp-talent-sourcing-plugin
 ```
 
 ## Editing this repo
@@ -161,8 +161,12 @@ These are display-only fields, owned by Marketing, and all three live in
 | Field | Current value |
 |-------|---------------|
 | `display.displayName` | `Lusha Talent Sourcing` |
-| `display.shortDescription` | `Source passive candidates with verified emails, phone numbers, and career-move signals` |
-| `display.category` | `Recruiting` — confirm against each host's accepted category list at submission |
+| `display.shortDescription` | `Find best-fit talent, get verified contact details, and see who may be open to a move` |
+| `display.category` | `Productivity + data` — confirm against each host's accepted category list at submission |
+| `descriptionTemplate` | The store-listing copy. It reaches Codex as `interface.longDescription` and Gemini as the manifest `description`; every other manifest gets the one-liner instead |
+
+The long copy is written by Marketing but still passes the vocabulary gate above, so a
+draft saying "seniority" or "contact data" comes back as `level` and `contact details`.
 
 The machine name is `lusha-talent-sourcing`. It was `lusha-hr` in 0.1.0, so anyone who
 installed that version reinstalls rather than updates. Treat it as fixed from here:

@@ -190,8 +190,10 @@ These are not preferences. Breaking any of them is a defect.
 18. **Dedupe by candidate id before ordering.** The same person comes back twice
     under two employers. See section 6d.
 19. **Never present an employer event from its `eventSummary` alone.** The summary
-    is generated text and it misattributes roles. Read `articleTitle` and
-    `articleHighlight` first. See section 6e.
+    binds a person, a role and an action to whichever tracked company the article
+    mentions, even when that company appears only as somebody's former employer.
+    Read `articleTitle` and `articleHighlight`, work out for yourself what
+    happened and at which company, and report that. See section 6e.
 20. **Never run employer events without setting `maxResultsPerSignal`.** It is
     the price of the call, not a response-size limit: 1 credit per event returned
     plus 1, so the ceiling is employers × the cap + 1. Quote that, then report
@@ -438,17 +440,47 @@ whole ranking.
 
 ## 6e. Read the article, not the summary
 
-`eventSummary` is generated from article text and it invents role attributions.
+`eventSummary` is generated from article text and it binds the wrong company.
 Measured: a Booking.com event read "Andrea D'Amico leaves Booking.com Limited as
-CEO". The article says he is the chief executive of WeRoad, a former Booking
-executive, stepping back to head hotels at Airbnb. He was never Booking's CEO.
-Another read "N26 hired Gino as CTO on Jul 1st '19", which is a biographical
-sentence inside an article about that person leaving in 2026.
+CEO". The article is about WeRoad. He is WeRoad's chief executive, Booking is
+where he used to work, and he is stepping back from WeRoad to head hotels at
+Airbnb while keeping a board seat. He was never Booking's CEO and that sentence
+appears nowhere in the article. Another read "N26 hired Gino as CTO on Jul 1st
+'19", which is a biographical sentence inside an article about that person
+leaving in 2026.
 
-So before you present any trigger, read `articleHighlight` and `articleTitle` and
-check the summary against them. If they disagree, trust the article and describe
-the event in your own words. If the article does not support a leadership change
-at the employer you asked about, drop the event.
+The mechanism is worth knowing, because it tells you what to look for. The
+generator takes the person, the nearest role word and the action from the article
+and attaches all three to the tracked company whose name appears in the text. It
+does not check which company the sentence actually attaches them to. Every
+fragment is true on its own and the combination is false.
+
+**So treat the summary as a hint and never as a finding.** Read `articleTitle`
+and `articleHighlight`, work out what happened, to whom and at which company, and
+then pick one of three verdicts. You always have to pick one.
+
+**The article supports a change at the employer you asked about.** Report it in
+your own words, with the role, the direction and the date the article states
+rather than the ones the summary states. Say what actually happened: stepping
+back while keeping a board seat is not the same as leaving, and describing it as
+a departure is wrong twice over.
+
+**The article is about a different company, and the employer you asked about
+appears only as history.** Phrasings like former, ex, previously, or left mark a
+past employer, not a current role. Say the event does not belong to that employer
+and do not count it. If the company the article is really about is on the
+recruiter's list, report it there instead.
+
+**The text does not say which company the role belongs to.** You get one sentence
+of article, not the article, so sometimes this genuinely cannot be resolved.
+Leave the event out, say you dropped one as unverifiable, and do not reason your
+way to a company the text never names. Reasoning harder is not the same as
+reading more.
+
+A quick test for the first two: does the role word sit in the same clause as the
+company, or is the company introduced separately as somewhere the person used to
+be? If the only mention of your employer is in a "former X" phrase, there is no
+event at your employer.
 
 **When duplicates disagree on the date, say so.** Delivery Hero returned the same
 CEO departure four times, dated 1 May 2026, 1 March 2027, 31 March 2027 and null.

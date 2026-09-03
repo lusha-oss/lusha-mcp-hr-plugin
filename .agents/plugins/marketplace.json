@@ -8,14 +8,14 @@
       "name": "lusha-talent-sourcing",
       "source": {
         "source": "url",
-        "url": "https://github.com/lusha-oss/lusha-mcp-hr-plugin.git",
+        "url": "https://github.com/lusha-oss/lusha-mcp-talent-sourcing-plugin.git",
         "ref": "master"
       },
       "policy": {
         "installation": "AVAILABLE",
         "authentication": "ON_INSTALL"
       },
-      "category": "Recruiting"
+      "category": "Productivity + data"
     }
   ]
 }
